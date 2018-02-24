@@ -1,17 +1,11 @@
 var express = require('express');
 var app = express();
 
-function isNumber(str){
-  return str.match(/^[0-9]+$/);
-}
+app.use(express.static(__dirname));
 
-function dateToString(date){
-  var locale = 'en-us',
-      month = date.toLocaleString(locale, {month:'long'});
-  
-  return month + " " +date.getDate()+", "+date.getFullYear();
-  
-}
+app.get("/",function(req,res){
+  res.render('index');
+})
 
 app.get("/:url",function(req,res){
   var url = req.params.url;
@@ -51,3 +45,16 @@ app.get("*",function(req,res){
 
 
 app.listen(process.env.PORT);
+
+
+function isNumber(str){
+  return str.match(/^[0-9]+$/);
+}
+
+function dateToString(date){
+  var locale = 'en-us',
+      month = date.toLocaleString(locale, {month:'long'});
+  
+  return month + " " +date.getDate()+", "+date.getFullYear();
+  
+}
